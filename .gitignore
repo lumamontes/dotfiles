@@ -1,0 +1,34 @@
+# Allowlist: nada entra a menos que liberado nominalmente abaixo.
+# Adicionar arquivo novo exige uma linha consciente aqui.
+*
+
+!.gitignore
+!.gitleaks.toml
+!README.md
+!bootstrap.sh
+!Brewfile
+
+!lib/
+lib/*
+!lib/phases.sh
+
+!tests/
+tests/*
+!tests/*.bats
+
+!home/
+home/*
+!home/.zshrc
+!home/.gitconfig
+!home/.zshrc.local.template
+!home/.gitconfig.local.template
+!home/.npmrc.template
+
+!config/
+config/*
+!config/gh/
+config/gh/*
+!config/gh/config.yml
+!config/git/
+config/git/*
+!config/git/ignore
