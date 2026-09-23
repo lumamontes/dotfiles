@@ -1,0 +1,17 @@
+# Copie para ~/.zshrc.local e preencha. Nunca versionado.
+# chmod 600 ~/.zshrc.local
+
+# GitHub — github.com/settings/tokens
+export GITHUB_USERNAME=""
+export GH_REGISTRY_USERNAME=""
+export GITHUB_TOKEN=""
+export GITHUB_AUTH_TOKEN=""
+export GH_ACTIONS_TOKEN=""
+export GITHUB_PERSONAL_ACCESS_TOKEN=""
+
+# Wiki.js interno — peca host e token ao time
+export PRD_WIKIJS_HOST=""
+export PRD_WIKIJS_TOKEN=""
+
+# Java — ajuste a versao conforme o projeto
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"

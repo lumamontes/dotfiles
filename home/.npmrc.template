@@ -1,0 +1,2 @@
+# Copie para ~/.npmrc e preencha com um PAT com escopo read:packages.
+//npm.pkg.github.com/:_authToken=
