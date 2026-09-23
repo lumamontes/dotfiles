@@ -1,0 +1,23 @@
+title = "dotfiles"
+
+# Regras genericas de proposito: este arquivo e publico, e uma regra que
+# escreve o hostname interno literal vazaria o que veio impedir.
+# A denylist nominal vive no repo privado (gitleaks-extra.toml).
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "path-absoluto-de-usuario"
+description = "Path absoluto contendo nome de usuario"
+regex = '''/Users/[a-z]+\.[a-z]+'''
+
+[[rules]]
+id = "hostname-de-infra-interna"
+description = "Hostname com TLD de infraestrutura interna"
+regex = '''[a-z0-9-]+\.(cloud|internal|corp|intranet)\b'''
+
+[[rules]]
+id = "asset-tag-corporativo"
+description = "Identificador de patrimonio de maquina corporativa"
+regex = '''\b[A-Z]{3,}-[A-Z0-9]{8,}\b'''
