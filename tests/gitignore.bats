@@ -25,3 +25,12 @@ setup() {
   run git -C "$REPO" check-ignore -q home/.zshrc.local
   [ "$status" -eq 0 ]
 }
+
+@test "o hook de pre-commit e versionado" {
+  run git -C "$REPO" check-ignore -q hooks/pre-commit
+  [ "$status" -eq 1 ]
+}
+
+@test "o hook versionado e executavel" {
+  [ -x "$REPO/hooks/pre-commit" ]
+}

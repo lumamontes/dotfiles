@@ -84,6 +84,17 @@ phase_symlinks() {
   fi
 }
 
+# --- hooks de git --------------------------------------------------------
+# phase_hooks <repo_root>
+# Aponta o repo para os hooks versionados. Sem isto, a "segunda barreira"
+# que o README promete nao existe em clone nenhum.
+phase_hooks() {
+  local repo="$1"
+  [ -d "$repo/hooks" ] || return 0
+  git -C "$repo" config core.hooksPath hooks
+  log "hooks: core.hooksPath -> hooks"
+}
+
 # --- oh-my-zsh e plugins custom ------------------------------------------
 # O .zshrc versionado faz source do oh-my-zsh e declara plugins custom que
 # nao vem de nenhum formula do brew: sem esta fase, shell novo quebra.

@@ -12,6 +12,10 @@
 lib/*
 !lib/phases.sh
 
+!hooks/
+hooks/*
+!hooks/pre-commit
+
 !tests/
 tests/*
 !tests/bootstrap.bats

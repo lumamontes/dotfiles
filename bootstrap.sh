@@ -69,8 +69,9 @@ brew bundle --file="$REPO_ROOT/Brewfile"
 echo "== fase 4/6: oh-my-zsh e plugins =="
 phase_omz
 
-echo "== fase 5/6: symlinks =="
+echo "== fase 5/6: symlinks e hooks =="
 phase_symlinks "$REPO_ROOT"
+phase_hooks "$REPO_ROOT"
 
 echo "== fase 6/6: runtimes =="
 if needs_nvm; then brew install nvm; mkdir -p "$DOTFILES_TARGET/.nvm"; else log "nvm ja instalado"; fi
