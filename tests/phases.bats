@@ -66,3 +66,26 @@ teardown() {
   [ "$status" -eq 0 ]
   [ "$(find "$TEST_HOME" -maxdepth 1 -name '.zshrc*' | wc -l)" -eq 1 ]
 }
+
+@test "needs_omz e verdadeiro quando oh-my-zsh nao existe" {
+  run needs_omz
+  [ "$status" -eq 0 ]
+}
+
+@test "needs_omz e falso quando oh-my-zsh existe" {
+  mkdir -p "$TEST_HOME/.oh-my-zsh"
+  run needs_omz
+  [ "$status" -eq 1 ]
+}
+
+@test "needs_zsh_plugin e verdadeiro quando o plugin nao existe" {
+  mkdir -p "$TEST_HOME/.oh-my-zsh/custom/plugins"
+  run needs_zsh_plugin zsh-completions
+  [ "$status" -eq 0 ]
+}
+
+@test "needs_zsh_plugin e falso quando o plugin existe" {
+  mkdir -p "$TEST_HOME/.oh-my-zsh/custom/plugins/zsh-completions"
+  run needs_zsh_plugin zsh-completions
+  [ "$status" -eq 1 ]
+}

@@ -75,3 +75,35 @@ phase_symlinks() {
     done
   fi
 }
+
+# --- oh-my-zsh e plugins custom ------------------------------------------
+# O .zshrc versionado faz source do oh-my-zsh e declara plugins custom que
+# nao vem de nenhum formula do brew: sem esta fase, shell novo quebra.
+
+ZSH_CUSTOM_PLUGINS="zsh-completions zsh-autosuggestions"
+
+needs_omz() { [ ! -d "$DOTFILES_TARGET/.oh-my-zsh" ]; }
+
+# needs_zsh_plugin <nome>
+needs_zsh_plugin() {
+  [ ! -d "$DOTFILES_TARGET/.oh-my-zsh/custom/plugins/$1" ]
+}
+
+phase_omz() {
+  if needs_omz; then
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  else
+    log "oh-my-zsh ja instalado"
+  fi
+
+  local p
+  for p in $ZSH_CUSTOM_PLUGINS; do
+    if needs_zsh_plugin "$p"; then
+      git clone --depth 1 "https://github.com/zsh-users/$p" \
+        "$DOTFILES_TARGET/.oh-my-zsh/custom/plugins/$p"
+    else
+      log "plugin $p ja instalado"
+    fi
+  done
+}

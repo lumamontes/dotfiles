@@ -45,30 +45,34 @@ if [ "$DRY_RUN" -eq 1 ]; then
   needs_clt      && echo "fase 1: instalaria Xcode CLT"      || echo "fase 1: ok"
   needs_homebrew && echo "fase 2: instalaria Homebrew"       || echo "fase 2: ok"
   echo "fase 3: rodaria brew bundle"
-  echo "fase 4: linkaria home/ e config/ em $DOTFILES_TARGET"
-  needs_nvm      && echo "fase 5: instalaria nvm"            || echo "fase 5: nvm ok"
-  needs_sdkman   && echo "fase 5: instalaria sdkman"         || echo "fase 5: sdkman ok"
+  needs_omz      && echo "fase 4: instalaria oh-my-zsh"       || echo "fase 4: oh-my-zsh ok"
+  echo "fase 5: linkaria home/ e config/ em $DOTFILES_TARGET"
+  needs_nvm      && echo "fase 6: instalaria nvm"            || echo "fase 6: nvm ok"
+  needs_sdkman   && echo "fase 6: instalaria sdkman"         || echo "fase 6: sdkman ok"
   if [ -n "$PRIVATE_PATH" ]; then echo "overlay: rodaria $PRIVATE_PATH/overlay.sh"; fi
   exit 0
 fi
 
-echo "== fase 1/5: Xcode Command Line Tools =="
+echo "== fase 1/6: Xcode Command Line Tools =="
 if needs_clt; then xcode-select --install; log "aguarde a instalacao e rode de novo"; exit 0
 else log "ja instalado"; fi
 
-echo "== fase 2/5: Homebrew =="
+echo "== fase 2/6: Homebrew =="
 if needs_homebrew; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else log "ja instalado"; fi
 
-echo "== fase 3/5: brew bundle =="
+echo "== fase 3/6: brew bundle =="
 brew bundle --file="$REPO_ROOT/Brewfile"
 
-echo "== fase 4/5: symlinks =="
+echo "== fase 4/6: oh-my-zsh e plugins =="
+phase_omz
+
+echo "== fase 5/6: symlinks =="
 phase_symlinks "$REPO_ROOT"
 
-echo "== fase 5/5: runtimes =="
+echo "== fase 6/6: runtimes =="
 if needs_nvm; then brew install nvm; mkdir -p "$DOTFILES_TARGET/.nvm"; else log "nvm ja instalado"; fi
 if needs_sdkman; then curl -s "https://get.sdkman.io" | bash; else log "sdkman ja instalado"; fi
 

@@ -43,3 +43,13 @@ setup() {
   run grep -q 'GITHUB_TOKEN=""' "$REPO/home/.zshrc.local.template"
   [ "$status" -eq 0 ]
 }
+
+@test ".zshrc guarda o source de .local/bin/env" {
+  run grep -qE '\[ -f "\$HOME/\.local/bin/env" \]' "$REPO/home/.zshrc"
+  [ "$status" -eq 0 ]
+}
+
+@test ".zshrc guarda o source do oh-my-zsh" {
+  run grep -qE '\[ -f "\$ZSH/oh-my-zsh\.sh" \]' "$REPO/home/.zshrc"
+  [ "$status" -eq 0 ]
+}

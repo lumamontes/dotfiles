@@ -79,7 +79,7 @@ plugins=(
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-source $ZSH/oh-my-zsh.sh
+[ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -113,19 +113,26 @@ source $ZSH/oh-my-zsh.sh
 # load zsh-completions
 autoload -U compinit && compinit
 
+# prefixo do Homebrew sem subprocesso (Apple Silicon ou Intel)
+for _p in /opt/homebrew /usr/local; do
+  [ -d "$_p/bin" ] && BREW_PREFIX="$_p" && break
+done
+
 # use nvm
-source "$(brew --prefix nvm)/nvm.sh"
+[ -f "$BREW_PREFIX/opt/nvm/nvm.sh" ] && source "$BREW_PREFIX/opt/nvm/nvm.sh"
 
 # use starship theme (needs to be at the end)
 eval "$(starship init zsh)"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+_zsh_hl="$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$_zsh_hl" ] && source "$_zsh_hl"
+unset _zsh_hl _p
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
