@@ -77,9 +77,7 @@ plugins=(
   zsh-syntax-highlighting
 )
 
-
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,7 +110,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 # load zsh-completions
 autoload -U compinit && compinit
 
@@ -122,11 +119,7 @@ source "$(brew --prefix nvm)/nvm.sh"
 # use starship theme (needs to be at the end)
 eval "$(starship init zsh)"
 
-
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-# Wiki.js - Ambiente de Produção
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
