@@ -37,3 +37,41 @@ link_file() {
   ln -sfn "$src" "$dest"
   log "link: $dest -> $src"
 }
+
+# --- Guards de idempotencia ---------------------------------------------
+# Convencao: retorna 0 quando a instalacao E necessaria.
+
+needs_clt()      { ! xcode-select -p >/dev/null 2>&1; }
+needs_homebrew() { ! command -v brew >/dev/null 2>&1; }
+needs_nvm()      { [ ! -d "$DOTFILES_TARGET/.nvm" ]; }
+needs_sdkman()   { [ ! -d "$DOTFILES_TARGET/.sdkman" ]; }
+
+# --- Fase 4: symlinks ----------------------------------------------------
+# phase_symlinks <repo_root>
+# Linka repo/home/* para $DOTFILES_TARGET/* e repo/config/* para
+# $DOTFILES_TARGET/.config/*. Arquivos .template sao pulados: eles sao
+# modelo para o usuario copiar, nao configuracao ativa.
+phase_symlinks() {
+  local repo="$1"
+
+  if [ -d "$repo/home" ]; then
+    local f base
+    for f in "$repo"/home/.[!.]*; do
+      [ -e "$f" ] || continue
+      base="$(basename "$f")"
+      case "$base" in
+        *.template) continue ;;
+      esac
+      link_file "$f" "$DOTFILES_TARGET/$base"
+    done
+  fi
+
+  if [ -d "$repo/config" ]; then
+    local d name
+    for d in "$repo"/config/*; do
+      [ -e "$d" ] || continue
+      name="$(basename "$d")"
+      link_file "$d" "$DOTFILES_TARGET/.config/$name"
+    done
+  fi
+}
