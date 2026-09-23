@@ -79,7 +79,7 @@ if needs_sdkman; then curl -s "https://get.sdkman.io" | bash; else log "sdkman j
 
 if [ -n "$PRIVATE_PATH" ]; then
   echo "== overlay privado =="
-  bash "$PRIVATE_PATH/overlay.sh"
+  DOTFILES_LIB="$REPO_ROOT/lib/phases.sh" bash "$PRIVATE_PATH/overlay.sh"
 fi
 
 cat <<'MANUAL'

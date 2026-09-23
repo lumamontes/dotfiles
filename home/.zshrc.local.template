@@ -9,9 +9,8 @@ export GITHUB_AUTH_TOKEN=""
 export GH_ACTIONS_TOKEN=""
 export GITHUB_PERSONAL_ACCESS_TOKEN=""
 
-# Wiki.js interno — peca host e token ao time
-export PRD_WIKIJS_HOST=""
-export PRD_WIKIJS_TOKEN=""
+# Servicos internos da sua organizacao, se houver: mantenha os nomes reais
+# fora deste arquivo. Modelo completo no repo privado.
 
 # Java — ajuste a versao conforme o projeto
 export JAVA_HOME="$(/usr/libexec/java_home -v 17)"

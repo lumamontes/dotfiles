@@ -53,3 +53,8 @@ setup() {
   run grep -qE '\[ -f "\$ZSH/oh-my-zsh\.sh" \]' "$REPO/home/.zshrc"
   [ "$status" -eq 0 ]
 }
+
+@test "os templates nao nomeiam servico interno da organizacao" {
+  run grep -riE 'wiki\.?js|intranet|confluence|peca ao time' "$REPO/home/"
+  [ "$status" -ne 0 ]
+}
