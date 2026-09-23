@@ -66,12 +66,20 @@ phase_symlinks() {
     done
   fi
 
+  # Linka ARQUIVO a arquivo, nunca o diretorio: um symlink de diretorio
+  # faria ferramentas como `gh auth login` gravarem credencial dentro da
+  # arvore de trabalho deste repositorio.
   if [ -d "$repo/config" ]; then
-    local d name
+    local d name f fname
     for d in "$repo"/config/*; do
-      [ -e "$d" ] || continue
+      [ -d "$d" ] || continue
       name="$(basename "$d")"
-      link_file "$d" "$DOTFILES_TARGET/.config/$name"
+      mkdir -p "$DOTFILES_TARGET/.config/$name"
+      for f in "$d"/*; do
+        [ -e "$f" ] || continue
+        fname="$(basename "$f")"
+        link_file "$f" "$DOTFILES_TARGET/.config/$name/$fname"
+      done
     done
   fi
 }

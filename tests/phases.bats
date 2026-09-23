@@ -44,7 +44,7 @@ teardown() {
   [ "$status" -eq 0 ]
   [ -L "$TEST_HOME/.zshrc" ]
   [ -L "$TEST_HOME/.gitconfig" ]
-  [ -L "$TEST_HOME/.config/gh" ]
+  [ -L "$TEST_HOME/.config/gh/config.yml" ]
 }
 
 @test "phase_symlinks ignora arquivos .template" {
@@ -88,4 +88,27 @@ teardown() {
   mkdir -p "$TEST_HOME/.oh-my-zsh/custom/plugins/zsh-completions"
   run needs_zsh_plugin zsh-completions
   [ "$status" -eq 1 ]
+}
+
+@test "config/ linka arquivo a arquivo, nao o diretorio" {
+  mkdir -p "$REPO_FIXTURE/config/gh"
+  echo "c" > "$REPO_FIXTURE/config/gh/config.yml"
+
+  run phase_symlinks "$REPO_FIXTURE"
+  [ "$status" -eq 0 ]
+  # o diretorio precisa ser real, senao credencial gravada pelo gh
+  # materializa dentro da arvore do repo publico
+  [ -d "$TEST_HOME/.config/gh" ]
+  [ ! -L "$TEST_HOME/.config/gh" ]
+  [ -L "$TEST_HOME/.config/gh/config.yml" ]
+}
+
+@test "credencial gravada ao lado do config linkado fica fora do repo" {
+  mkdir -p "$REPO_FIXTURE/config/gh"
+  echo "c" > "$REPO_FIXTURE/config/gh/config.yml"
+  phase_symlinks "$REPO_FIXTURE"
+
+  # simula `gh auth login` gravando hosts.yml
+  echo "oauth_token: segredo" > "$TEST_HOME/.config/gh/hosts.yml"
+  [ ! -e "$REPO_FIXTURE/config/gh/hosts.yml" ]
 }
