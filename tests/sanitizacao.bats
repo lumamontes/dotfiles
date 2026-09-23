@@ -10,22 +10,22 @@ setup() {
 }
 
 @test "nenhum arquivo versionado contem token" {
-  run git -C "$REPO" grep -lE 'gh[pousr]_[A-Za-z0-9]{30}|github_pat_[A-Za-z0-9_]{30}|eyJhbGciOi' -- . "$SELF"
+  run git -C "$REPO" grep --untracked -lE 'gh[pousr]_[A-Za-z0-9]{30}|github_pat_[A-Za-z0-9_]{30}|eyJhbGciOi' -- . "$SELF"
   [ "$status" -ne 0 ]
 }
 
 @test "nenhum arquivo versionado contem path absoluto de usuario" {
-  run git -C "$REPO" grep -lE '/Users/[a-z]+\.[a-z]+' -- . "$SELF"
+  run git -C "$REPO" grep --untracked -lE '/Users/[a-z]+\.[a-z]+' -- . "$SELF"
   [ "$status" -ne 0 ]
 }
 
 @test "nenhum arquivo versionado contem hostname de infra interna" {
-  run git -C "$REPO" grep -lE '[a-z0-9-]+\.(cloud|internal|corp|intranet)' -- . "$SELF"
+  run git -C "$REPO" grep --untracked -lE '[a-z0-9-]+\.(cloud|internal|corp|intranet)' -- . "$SELF"
   [ "$status" -ne 0 ]
 }
 
 @test "nenhum arquivo versionado contem asset tag de maquina corporativa" {
-  run git -C "$REPO" grep -lE '[A-Z]{3,}-[A-Z0-9]{8,}' -- . "$SELF"
+  run git -C "$REPO" grep --untracked -lE '[A-Z]{3,}-[A-Z0-9]{8,}' -- . "$SELF"
   [ "$status" -ne 0 ]
 }
 

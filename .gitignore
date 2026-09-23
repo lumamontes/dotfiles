@@ -14,7 +14,11 @@ lib/*
 
 !tests/
 tests/*
-!tests/*.bats
+!tests/bootstrap.bats
+!tests/gitignore.bats
+!tests/link_file.bats
+!tests/phases.bats
+!tests/sanitizacao.bats
 
 !home/
 home/*
