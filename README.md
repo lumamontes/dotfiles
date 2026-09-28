@@ -27,11 +27,15 @@ O arquivo versionado deixa visiveis workspace, branch, status Git, pane e o
 titulo que o agente publica. `Shift+Left/Right` troca tabs; tambem existem os
 atalhos diretos `Ctrl+Alt+1..9` para tabs e `Ctrl+Alt+Shift+1..9` para
 workspaces. O prefixo `Ctrl+B` continua disponivel como fallback e para abrir
-a ajuda (`Ctrl+B`, `?`).
+a ajuda (`Ctrl+B`, `?`) ou o navegador de workspaces (`Ctrl+B`, `w`). No
+navegador, use as setas e `Enter` para focar outro workspace. Pela CLI, liste e
+foque um workspace com `herdr workspace list` e `herdr workspace focus
+<workspace-id>`.
 
 O guia de uso diario esta em
 `docs/herdr-daily-workflow.md`; a decisao e os tradeoffs estao em
 `docs/adr/0001-herdr-neurodivergent-workspace.md`.
+O cheatsheet para o trabalho diario esta em `docs/herdr-cheatsheet.md`.
 As decisoes que ainda exigem teste manual estao em
 `docs/herdr-open-decisions.md`.
 Para uma feature que atravessa varios microservicos, use `herdr-feature` para

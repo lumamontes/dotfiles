@@ -33,6 +33,8 @@ The tracked Herdr configuration provides:
 - `Shift+Left` and `Shift+Right` for previous and next tab.
 - `Ctrl+Alt+1..9` for indexed tab jumps.
 - `Ctrl+Alt+Shift+1..9` for indexed workspace jumps.
+- `Ctrl+B`, then `w`, to open the workspace navigator and focus another
+  workspace with the arrow keys and `Enter`.
 - `Ctrl+Alt+h/j/k/l` for pane movement.
 - Mouse capture disabled so terminal-native selection and scrolling remain
   reliable.
@@ -40,6 +42,8 @@ The tracked Herdr configuration provides:
 - `herdr-worktree` for an explicitly labelled worktree workspace.
 - OpenCode transcript line scrolling on `Ctrl+Alt+Up/Down`.
 - Prefix bindings remain available through `Ctrl+B` as a fallback.
+- CLI workspace listing and focus remain available when keyboard navigation is
+  inconvenient: `herdr workspace list` and `herdr workspace focus <id>`.
 - Sidebar rows for agent state, agent name, workspace, tab, pane, terminal
   title, and optional `$summary` metadata.
 - Sidebar rows for workspace name, Git branch, and Git status.
@@ -69,6 +73,9 @@ The terms in this setup have precise meanings:
   an agent-generated task title when that agent publishes one.
 - **Summary**: optional display-only metadata reported through Herdr's CLI or
   agent skill, intended for a short current task or next action.
+
+The UI may call workspaces "spaces" in its navigator. This is only a display
+term; the CLI and configuration use `workspace` consistently.
 
 For a multi-service feature, tabs are the high-level service contexts. Panes
 are reserved for closely related processes within one service, such as its

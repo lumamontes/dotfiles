@@ -139,8 +139,8 @@ herdr-feature "PAY-123 checkout" \
 
 This creates one workspace labelled `PAY-123 checkout` and tabs labelled
 `frontend`, `bff`, and `backend`, each rooted in its own repository. The command
-does not change focus, so you can start the feature's main Claude session in
-the frontend tab and run the other services in their tabs.
+focuses the new workspace, so you can immediately start the feature's main
+Claude session in the frontend tab and run the other services in their tabs.
 
 Create a separately branched worktree with an explicit label:
 
@@ -175,12 +175,43 @@ The primary low-memory shortcuts are:
 - `Ctrl+B`, then `?`: show active keybindings.
 - `Ctrl+B`, then `q`: detach while agents continue running.
 
+### Switching Workspaces (Spaces)
+
+In the Herdr UI, a workspace is the same high-level container that may be
+shown as a space in the navigator. To switch directly between workspaces:
+
+- Press `Ctrl+Alt+Shift+1..9` to jump to the workspace at that index.
+- Press `Ctrl+B`, then `w` to open the workspace navigator, use the arrow keys
+  to select a workspace, and press `Enter` to focus it.
+
+If the navigator appears not to move, verify that more than one workspace
+exists. Tabs inside one workspace are not separate workspaces. Create another
+workspace when the work is independent:
+
+```bash
+herdr workspace list
+herdr workspace create --cwd ~/www/another-repository --label "another task"
+```
+
+The CLI can focus an exact workspace when keyboard navigation is inconvenient:
+
+```bash
+herdr workspace list
+herdr workspace focus <workspace-id>
+```
+
+Use the ID returned by `herdr workspace list`; do not infer it from the
+workspace's position in the sidebar. Workspace focus changes the active
+workspace but does not stop its agents or panes.
+
 Plain arrow keys remain available for pane and navigation movement. They are
 not assigned to tabs because Herdr reserves left and right arrows as pane
 navigation aliases.
 
 When the workspace navigator is open, arrow keys move through the available
 workspaces. If only one workspace exists, the selection will not visibly move.
+After creating or focusing a workspace, use `Ctrl+Alt+Shift+1..9` for quick
+switching once its index is known.
 
 For OpenCode message scrolling, use its smooth line movement shortcuts:
 

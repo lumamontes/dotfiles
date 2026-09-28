@@ -27,7 +27,7 @@ herdr-feature() {
   response="$(herdr workspace create \
     --cwd "$first_repo" \
     --label "$feature_label" \
-    --no-focus)" || return
+    --focus)" || return
   workspace_id="$(print -r -- "$response" | jq -r '.result.workspace.workspace_id')"
   first_tab_id="$(print -r -- "$response" | jq -r '.result.tab.tab_id')"
 
@@ -81,5 +81,5 @@ herdr-worktree() {
     --cwd "$repo" \
     --branch "$branch" \
     --label "$task_label / $repo_name [worktree]" \
-    --no-focus
+    --focus
 }

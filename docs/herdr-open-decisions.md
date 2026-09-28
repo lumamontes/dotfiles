@@ -4,26 +4,30 @@ This file contains the parts of the Herdr setup that cannot be safely decided
 from configuration alone. They require testing in the actual terminal, direct
 observation of notification behavior, or a personal preference decision.
 
-## 1. Test Arrow Shortcuts In iTerm2
+## 1. Test Tab And Workspace Shortcuts In iTerm2
 
 The configured shortcuts are:
 
 - `Shift+Left`: previous tab.
 - `Shift+Right`: next tab.
+- `Ctrl+Alt+Shift+1..9`: jump directly to a workspace.
 
 The first keyboard-help and tab-navigation tests passed. The shortcuts are not
 yet natural, so keep the help panel available with `Ctrl+B`, then `?` while
 learning them. It is a reference panel, not a command needed for normal use.
 
-Test them with at least two Herdr tabs open. If they do not work, inspect
-iTerm2 key mappings and add forwarding rules for those two combinations. Keep
-plain arrow keys available for pane navigation.
+Test the tab shortcuts with at least two Herdr tabs open and the workspace
+shortcut with at least two workspaces open. The workspace navigator is also
+available with `Ctrl+B`, then `w`; select a workspace with the arrow keys and
+press `Enter`. If a shortcut does not work, inspect iTerm2 key mappings and
+add a forwarding rule for that combination. Keep plain arrow keys available
+for pane navigation.
 
 Acceptance criterion:
 
 ```text
-I can move between nearby tabs without using the mouse or remembering a
-multi-step prefix sequence.
+I can move between nearby tabs and workspaces without using the mouse or
+remembering a multi-step prefix sequence.
 ```
 
 ## 2. Decide Whether Symbols Are Understandable
@@ -165,8 +169,9 @@ herdr-feature "PAY-123 checkout" \
   backend=~/www/checkout-api
 ```
 
-It creates the workspace and service tabs without changing focus. This keeps
-the feature grouped without adding a manifest or task orchestration layer.
+It creates the workspace and service tabs, then focuses the new feature. This
+keeps the feature grouped without adding a manifest or task orchestration
+layer.
 
 For a separate branch/worktree:
 
