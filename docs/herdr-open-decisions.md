@@ -11,6 +11,10 @@ The configured shortcuts are:
 - `Shift+Left`: previous tab.
 - `Shift+Right`: next tab.
 
+The first keyboard-help and tab-navigation tests passed. The shortcuts are not
+yet natural, so keep the help panel available with `Ctrl+B`, then `?` while
+learning them. It is a reference panel, not a command needed for normal use.
+
 Test them with at least two Herdr tabs open. If they do not work, inspect
 iTerm2 key mappings and add forwarding rules for those two combinations. Keep
 plain arrow keys available for pane navigation.
@@ -40,7 +44,20 @@ If symbols are insufficient, choose one of these directions:
 The current setup preserves Herdr's full internal state model regardless of
 this presentation choice.
 
-## 3. Verify Claude Code Titles
+## 3. Verify Smooth OpenCode Scrolling And Copying
+
+Herdr mouse capture is disabled because terminal-native copying is a frequent
+workflow. Restart OpenCode after the TUI configuration change, then test:
+
+- Drag-selecting text copies only the intended text.
+- `Ctrl+Alt+Up` moves the OpenCode transcript up one line.
+- `Ctrl+Alt+Down` moves it down one line.
+- The viewport can stop at an intermediate position.
+
+If this works, keep the keyboard-first Herdr UI. If it does not, inspect
+iTerm2's key mappings before adding more Herdr shortcuts.
+
+## 4. Verify Claude Code Titles
 
 Open a Claude Code session inside Herdr and inspect the sidebar. Confirm:
 
@@ -52,7 +69,7 @@ Open a Claude Code session inside Herdr and inspect the sidebar. Confirm:
 If Claude does not publish useful titles, use a short manual pane name or have
 the installed Herdr skill report a `$summary` value instead.
 
-## 4. Test Notification Load
+## 5. Test Notification Load
 
 Run two small background tasks and observe:
 
@@ -72,7 +89,7 @@ Possible decisions:
 Herdr currently documents delay and active-tab suppression, but not a general
 notification digest or rate limiter.
 
-## 5. Validate The Installed Herdr Skill
+## 6. Validate The Installed Herdr Skill
 
 The official Herdr skill is installed. Test it with a small two-agent exercise:
 
@@ -85,7 +102,7 @@ If the skill is useful, add its installation command to the setup checklist for
 the second Mac. If it is not useful, keep Herdr as a visual workspace manager
 without asking agents to control the layout.
 
-## 6. macOS Portability Checks
+## 7. macOS Portability Checks
 
 The dotfiles repository carries the Herdr configuration, but the following
 still require machine-specific setup:
@@ -96,11 +113,29 @@ still require machine-specific setup:
 - Herdr and agent integration installation.
 - Native agent session storage.
 - Any global skill installation.
+- Whether the machine-specific `.zshrc` sources `~/.herdr-workflow.zsh`.
+- Whether OpenCode's TUI settings contain the smooth transcript scrolling
+  bindings.
+
+The current Mac has these local OpenCode settings in
+`~/.config/opencode/tui.jsonc`:
+
+```jsonc
+"keybinds": {
+  "messages_line_up": "ctrl+alt+up",
+  "messages_line_down": "ctrl+alt+down"
+}
+```
+
+These settings are not yet linked by the dotfiles bootstrap because the file
+also contains machine-local OpenCode plugin configuration. Copy the keybinds
+manually to the work Mac, or decide later whether OpenCode's full TUI config
+should become a tracked dotfiles file.
 
 On the second Mac, verify these explicitly rather than assuming the dotfiles
 repository can copy them.
 
-## 7. Deep-Work Notification Preference
+## 8. Deep-Work Notification Preference
 
 Choose whether a dedicated deep-work mode is needed. Herdr does not currently
 provide a complete built-in focus mode.
@@ -115,7 +150,7 @@ Possible approaches:
 The choice depends on whether missing a blocked agent is worse than being
 interrupted by a completion notification.
 
-## 8. Microservices Task Organization
+## 9. Microservices Task Organization
 
 Herdr handles multiple repositories well, but it does not currently create a
 first-class parent object for one task spanning several repositories.
@@ -151,7 +186,7 @@ statuses.
 If this becomes a daily pattern, a future plugin could provide a real task
 group row and aggregate status across services. That is not implemented yet.
 
-## 9. Existing Terminal Migration
+## 10. Existing Terminal Migration
 
 Live iTerm2 processes cannot be adopted by Herdr. Decide whether to:
 
@@ -162,7 +197,7 @@ Live iTerm2 processes cannot be adopted by Herdr. Decide whether to:
 Do not close an old session until its work or native agent session has been
 verified in the new pane.
 
-## 10. One-Week Review
+## 11. One-Week Review
 
 After one week, record:
 

@@ -157,6 +157,11 @@ the services visually grouped while each tab retains its own repository path.
 The helper is loaded by the tracked `.zshrc` configuration. Herdr should be
 running before invoking it.
 
+The current setup disables Herdr mouse capture so terminal-native text
+selection and scrolling work normally. This means the Herdr sidebar and split
+borders are keyboard-driven; use the shortcuts in the next section instead of
+dragging Herdr UI elements.
+
 ## Moving Around
 
 The primary low-memory shortcuts are:
@@ -173,6 +178,22 @@ The primary low-memory shortcuts are:
 Plain arrow keys remain available for pane and navigation movement. They are
 not assigned to tabs because Herdr reserves left and right arrows as pane
 navigation aliases.
+
+When the workspace navigator is open, arrow keys move through the available
+workspaces. If only one workspace exists, the selection will not visibly move.
+
+For OpenCode message scrolling, use its smooth line movement shortcuts:
+
+- `Ctrl+Alt+Up`: one line up.
+- `Ctrl+Alt+Down`: one line down.
+- `Ctrl+Alt+U`: half page up.
+- `Ctrl+Alt+D`: half page down.
+
+These are different from Herdr's tab and pane shortcuts and preserve a
+scrollable viewport instead of jumping directly between messages.
+
+These OpenCode shortcuts are configured in the local OpenCode TUI settings.
+Restart OpenCode after changing that configuration, including on another Mac.
 
 The prefix fallback is always available:
 
@@ -346,6 +367,9 @@ During the first week:
 - Record which notifications were useful or disruptive.
 - Check whether `Shift+Left` and `Shift+Right` survive the chosen terminal's
   key handling.
+- Use `source ~/.zshrc` once in shells opened before the helper was installed.
+- Confirm that mouse selection copies only the intended terminal text after
+  Herdr mouse capture is disabled.
 
 The setup should be adjusted based on actual interruption and resumption
 experience, not on an assumed universal ADHD or autistic workflow.

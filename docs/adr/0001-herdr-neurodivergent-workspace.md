@@ -34,8 +34,11 @@ The tracked Herdr configuration provides:
 - `Ctrl+Alt+1..9` for indexed tab jumps.
 - `Ctrl+Alt+Shift+1..9` for indexed workspace jumps.
 - `Ctrl+Alt+h/j/k/l` for pane movement.
+- Mouse capture disabled so terminal-native selection and scrolling remain
+  reliable.
 - `herdr-feature` for one feature workspace with one service tab per repository.
 - `herdr-worktree` for an explicitly labelled worktree workspace.
+- OpenCode transcript line scrolling on `Ctrl+Alt+Up/Down`.
 - Prefix bindings remain available through `Ctrl+B` as a fallback.
 - Sidebar rows for agent state, agent name, workspace, tab, pane, terminal
   title, and optional `$summary` metadata.
@@ -67,6 +70,10 @@ The terms in this setup have precise meanings:
 - **Summary**: optional display-only metadata reported through Herdr's CLI or
   agent skill, intended for a short current task or next action.
 
+For a multi-service feature, tabs are the high-level service contexts. Panes
+are reserved for closely related processes within one service, such as its
+server, logs, and tests.
+
 ## Decisions and tradeoffs
 
 ### Arrow-key navigation
@@ -81,6 +88,13 @@ arrows away from pane movement.
 modifier family as more likely to pass through macOS terminals safely than
 plain `Alt` shortcuts. They are a fallback for direct tab selection, not the
 primary learning path.
+
+### Mouse and scrolling
+
+Mouse capture is disabled because copying terminal text is a frequent workflow
+and selection accuracy is more important than clickable Herdr borders for this
+setup. OpenCode's line-scroll shortcuts provide a smooth viewport without
+requiring Page Up/Page Down keys.
 
 ### Context over notification volume
 

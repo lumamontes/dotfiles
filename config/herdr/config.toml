@@ -20,6 +20,7 @@ focus_pane_right = ["prefix+l", "ctrl+alt+l"]
 [ui]
 sidebar_width = 42
 sidebar_max_width = 56
+mouse_capture = false
 status_indicators = "symbols"
 show_agent_labels_on_pane_borders = true
 window_title = "{hostname}: {workspace} / {tab} / {pane} / {terminal_title}"
