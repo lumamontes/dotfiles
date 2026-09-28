@@ -137,5 +137,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 
+# Herdr workflow helpers
+[ -f "$HOME/.herdr-workflow.zsh" ] && source "$HOME/.herdr-workflow.zsh"
+
 # Segredos e configuracao especifica da maquina. Nunca versionado.
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

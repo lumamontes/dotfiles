@@ -27,10 +27,19 @@ tests/*
 !home/
 home/*
 !home/.zshrc
+!home/.herdr-workflow.zsh
 !home/.gitconfig
 !home/.zshrc.local.template
 !home/.gitconfig.local.template
 !home/.npmrc.template
+
+!docs/
+docs/*
+!docs/adr/
+docs/adr/*
+!docs/adr/0001-herdr-neurodivergent-workspace.md
+!docs/herdr-daily-workflow.md
+!docs/herdr-open-decisions.md
 
 !config/
 config/*
@@ -40,3 +49,6 @@ config/gh/*
 !config/git/
 config/git/*
 !config/git/ignore
+!config/herdr/
+config/herdr/*
+!config/herdr/config.toml

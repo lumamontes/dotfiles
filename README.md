@@ -12,6 +12,31 @@ cd ~/www/dotfiles
 
 `./bootstrap.sh --dry-run` mostra o que ele faria sem escrever nada.
 
+### Herdr
+
+O `Brewfile` instala o Herdr e `config/herdr/config.toml` vira um symlink em
+`~/.config/herdr/config.toml`. Depois do bootstrap, recarregue a configuracao:
+
+```bash
+herdr server reload-config
+herdr integration install claude
+herdr integration install opencode
+```
+
+O arquivo versionado deixa visiveis workspace, branch, status Git, pane e o
+titulo que o agente publica. `Shift+Left/Right` troca tabs; tambem existem os
+atalhos diretos `Ctrl+Alt+1..9` para tabs e `Ctrl+Alt+Shift+1..9` para
+workspaces. O prefixo `Ctrl+B` continua disponivel como fallback e para abrir
+a ajuda (`Ctrl+B`, `?`).
+
+O guia de uso diario esta em
+`docs/herdr-daily-workflow.md`; a decisao e os tradeoffs estao em
+`docs/adr/0001-herdr-neurodivergent-workspace.md`.
+As decisoes que ainda exigem teste manual estao em
+`docs/herdr-open-decisions.md`.
+Para uma feature que atravessa varios microservicos, use `herdr-feature` para
+criar um workspace com uma tab por servico.
+
 O script instala Xcode CLT, Homebrew, o `Brewfile`, oh-my-zsh, os symlinks e os
 runtimes (nvm, sdkman) — pulando o que já existe. No fim, imprime o que ainda
 falta fazer à mão: preencher os arquivos `.local`, `gh auth login`, chave SSH e
