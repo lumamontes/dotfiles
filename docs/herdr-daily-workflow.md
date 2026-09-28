@@ -70,6 +70,39 @@ claude
 Herdr detects supported agents automatically. The sidebar shows the agent,
 workspace, tab, pane, status, and terminal title.
 
+## Where To Run The Helper
+
+`herdr-feature` is a zsh function loaded from `~/.zshrc`. It talks to the
+already-running Herdr server; it is not typed into the Herdr command palette.
+
+You can run it in either place:
+
+- A normal iTerm2 shell outside the Herdr interface, while Herdr is already
+  running in another terminal tab or window.
+- A shell pane inside Herdr. Open a new Herdr tab with `Ctrl+B`, then `c`, and
+  run it there.
+
+If the shell was opened before the dotfiles update, load the helper first:
+
+```bash
+source ~/.zshrc
+```
+
+Example from a normal iTerm2 shell:
+
+```bash
+herdr status
+herdr-feature "PAY-123 checkout" \
+  frontend=~/www/checkout-web \
+  bff=~/www/checkout-bff \
+  backend=~/www/checkout-api
+```
+
+The helper creates the workspace and tabs but does not decide which commands
+to run in them. Afterward, focus each tab and start Claude or the service
+process there. This separation is deliberate: the same service may be started
+with different commands on different projects or machines.
+
 ## Choosing Tabs Or Worktrees
 
 Use another **tab** for a service or supporting view that belongs to the same

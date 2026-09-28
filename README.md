@@ -36,6 +36,9 @@ As decisoes que ainda exigem teste manual estao em
 `docs/herdr-open-decisions.md`.
 Para uma feature que atravessa varios microservicos, use `herdr-feature` para
 criar um workspace com uma tab por servico.
+O helper roda em qualquer shell zsh enquanto o servidor Herdr estiver ativo:
+em um tab normal do iTerm2 ou em um shell pane do proprio Herdr. Se necessario,
+rode `source ~/.zshrc` antes.
 
 O script instala Xcode CLT, Homebrew, o `Brewfile`, oh-my-zsh, os symlinks e os
 runtimes (nvm, sdkman) — pulando o que já existe. No fim, imprime o que ainda
